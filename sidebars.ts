@@ -15,6 +15,12 @@ const sidebars: SidebarsConfig = {
       "className": "sidebar-section-icon-get-started"
     },
     {
+      "type": "doc",
+      "id": "quick-start",
+      "label": "Quick Start Guide",
+      "className": "sidebar-section-icon-quick-start"
+    },
+    {
       "type": "category",
       "label": "Concepts",
       "collapsed": true,
