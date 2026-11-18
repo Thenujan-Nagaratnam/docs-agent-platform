@@ -9,7 +9,6 @@ on:
   pull_request:
     paths:
       - 'docs/**'
-      - 'versioned_docs/**'
       - '.vale.ini'
       - '.github/styles/**'
 
@@ -19,9 +18,6 @@ permissions:
 jobs:
   vale:
     name: Vale
-    # A docs release PR copies all of docs/ into versioned_docs/, so every line
-    # in it counts as added. Its content was already checked under docs/.
-    if: ${{ !startsWith(github.head_ref, 'docs/release-') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -38,7 +34,7 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           pages=$(git diff --name-only --diff-filter=d "$BASE_SHA" HEAD -- \
-            'docs/*.md' 'docs/*.mdx' 'versioned_docs/*.md' 'versioned_docs/*.mdx')
+            'docs/*.md' 'docs/*.mdx')
           config=$(git diff --name-only "$BASE_SHA" HEAD -- .vale.ini .github/styles)
           if [ -z "$pages" ] && [ -n "$config" ]; then
             pages=docs

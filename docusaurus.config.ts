@@ -1,53 +1,13 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import fs from 'fs';
 import gtmNoscriptPlugin from './plugins/gtm-noscript';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-const versions: string[] = JSON.parse(fs.readFileSync('./versions.json', 'utf-8'));
-// Versions cut ahead of their release. Their pages are built and reachable by URL,
-// but stay out of the version dropdown, the announcement bar, search, and search
-// engines until the release ships; remove one from this list to publish it.
-const unreleasedVersions: string[] = [];
-// STS (short-term support) releases are listed in the version dropdown but never
-// become the default version; the site keeps opening on the latest other release.
-const stsVersions = ['v2026.11.0'];
-const stsLabel = (v: string) => `STS ${v.replace(/^v/, '')}`;
-// Skip non-release entries like "cloud" which are manually maintained versions
-const latestVersion =
-  versions.find(v => /^v\d+/.test(v) && !stsVersions.includes(v) && !unreleasedVersions.includes(v))
-  ?? versions[0];
-// The newest published release, STS or not. The announcement bar announces this one.
-const newestRelease =
-  versions.find(v => /^v\d+/.test(v) && !unreleasedVersions.includes(v)) ?? versions[0];
-const newestReleaseLabel = stsVersions.includes(newestRelease)
-  ? stsLabel(newestRelease)
-  : newestRelease;
 
-// Read quickStartDockerTag from _constants.md
-const constantsFile = fs.readFileSync('./docs/_constants.md', 'utf-8');
-const dockerTagMatch = constantsFile.match(/quickStartDockerTag:\s*['"]([^'"]+)['"]/);
-const quickStartDockerTag = dockerTagMatch ? dockerTagMatch[1] : latestVersion;
-
-// Where the announcement bar's link points: the official wso2.com download page, not a
-// GitHub release, which an STS release may not have.
-const releaseUrl =
-  'https://wso2.com/products/downloads/?product=wso2agentmanager&package=quickstart';
-
-// Pages whose path changed when the docs were reorganised into the
-// Get Started / Concepts / Guides / Tutorials / References structure. The
-// pre-reorganisation URLs are mapped forward to keep existing bookmarks and
-// inbound links working.
-const reorganizedPaths: [string, string][] = [
-  ['overview/what-is-amp', 'get-started/what-is-amp'],
-  ['getting-started/quick-start', 'get-started/quick-start'],
-  ['getting-started/on-k3d', 'guides/on-k3d'],
-  ['getting-started/create-your-first-agent', 'tutorials/create-your-first-agent'],
-  ['components/amp-instrumentation', 'guides/amp-instrumentation'],
-  ['administration/isolation-tiers/gvisor', 'guides/isolation-tiers/gvisor'],
-  ['administration/isolation-tiers/kata', 'guides/isolation-tiers/kata'],
-];
+// This branch holds the Agent Manager Cloud docs only. Cloud is always the
+// latest, so the docs are not versioned. The self-hosted docs are on main, and
+// AI Gateway and AI Workspace (agent-control-plane) are on their own branches.
 
 const config: Config = {
   title: 'WSO2 Agent Manager',
@@ -68,7 +28,7 @@ const config: Config = {
   url: 'https://wso2.com',
   // Set the /<baseUrl>/ pathname under which the site is served.
   // through to this GitHub Pages site.
-  baseUrl: '/agent-platform/docs/',
+  baseUrl: '/agent-platform/docs/cloud/',
 
   // Set true for GitHub pages deployment.
   trailingSlash: true,
@@ -81,7 +41,6 @@ const config: Config = {
   onBrokenLinks: 'throw',
 
   customFields: {
-    latestVersion,
     searchProvider: 'auto',
   },
 
@@ -103,9 +62,9 @@ const config: Config = {
           },
           {
             '@type': 'WebSite',
-            '@id': 'https://wso2.com/agent-platform/docs/#website',
-            name: 'WSO2 Agent Manager Documentation',
-            url: 'https://wso2.com/agent-platform/docs/',
+            '@id': 'https://wso2.com/agent-platform/docs/cloud/#website',
+            name: 'WSO2 Agent Manager Cloud Documentation',
+            url: 'https://wso2.com/agent-platform/docs/cloud/',
             inLanguage: 'en',
             publisher: {'@id': 'https://wso2.com/#organization'},
           },
@@ -176,44 +135,11 @@ const config: Config = {
       {
         content: {
           // Redirect-only pages (src/pages) have no content to convert.
-          excludeRoutes: [
-            '/agent-platform/docs/',
-            '/agent-platform/docs/docs/**',
-            ...unreleasedVersions.map(v => `/agent-platform/docs/${v}/**`),
-          ],
+          excludeRoutes: ['/agent-platform/docs/cloud/'],
         },
       },
     ],
-    [
-      require.resolve('docusaurus-lunr-search'),
-      {
-        // Next and unreleased versions are noindexed; keep them out of search results too.
-        excludeRoutes: ['next', 'next/**', ...unreleasedVersions.flatMap(v => [v, `${v}/**`])],
-      },
-    ],
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        // Send the /latest/ form of each pre-reorganisation URL to the
-        // canonical page in one hop; the alias follows whatever is current.
-        redirects: [
-          ...reorganizedPaths.map(([from, to]) => ({
-            from: `/latest/${from}`,
-            to: `/${latestVersion}/${to}`,
-          })),
-          ...['next', 'cloud', latestVersion, ...stsVersions, 'latest'].map((alias) => ({
-            from: `/${alias}`,
-            to: `/${alias === 'latest' ? latestVersion : alias}/get-started/what-is-amp`,
-          })),
-        ],
-        createRedirects(existingPath: string) {
-          if (existingPath.includes(`/${latestVersion}/`)) {
-            return [existingPath.replace(`/${latestVersion}/`, '/latest/')];
-          }
-          return undefined;
-        },
-      },
-    ],
+    require.resolve('docusaurus-lunr-search'),
     gtmNoscriptPlugin,
   ],
 
@@ -225,45 +151,19 @@ const config: Config = {
           // baseUrl already ends in /docs/ (see above), so mount the docs
           // plugin at that root instead of nesting another docs/ segment.
           routeBasePath: '/',
-          lastVersion: latestVersion,
-          versions: {
-            current: {
-              label: 'Next',
-              banner: 'unreleased',
-              noIndex: true,
-            },
-            cloud: {
-              label: 'Cloud',
-              banner: 'none',
-              path: 'cloud',
-            },
-            [latestVersion]: {
-              label: latestVersion,
-              path: latestVersion,
-            },
-            // An STS release sorts above the default version, which would
-            // otherwise give it the "unreleased" banner. Until it ships, it keeps
-            // that banner and stays out of search engines.
-            ...Object.fromEntries(stsVersions.map((v) => [v, {
-              label: stsLabel(v),
-              path: v,
-              banner: unreleasedVersions.includes(v) ? 'unreleased' as const : 'none' as const,
-              noIndex: unreleasedVersions.includes(v),
-            }])),
-          },
           sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/wso2/docs-agent-platform/edit/main/',
+            'https://github.com/wso2/docs-agent-platform/edit/agent-management-cloud/',
         },
         blog: false, // Disable blog until we have content
         sitemap: {
           changefreq: null,
           priority: null,
-          ignorePatterns: ['/agent-platform/docs/search/**'],
+          ignorePatterns: ['/agent-platform/docs/cloud/search/**'],
         },
         theme: {
           // Order matters: amp-theme.css layers the site theme over
@@ -286,19 +186,6 @@ const config: Config = {
       {property: 'og:site_name', content: 'WSO2 Agent Manager'},
       {property: 'og:type', content: 'website'},
     ],
-    announcementBar: {
-      // Announce newestRelease (versions.json), NOT quickStartDockerTag. The latter is the
-      // container image tag the quick-start guide pins, and it moves for reasons that have
-      // nothing to do with a release: 271d85aaa retagged it to a ThunderID version, which
-      // silently changed this banner to announce a "1.0.0" release of Agent Manager that
-      // did not exist.
-      // A new id per release shows the bar again to readers who closed the last one.
-      id: `release_${newestRelease.replace(/\./g, '_')}`,
-      content:
-        `🎉 WSO2 Agent Manager <a target="_blank" rel="noopener noreferrer" href="${releaseUrl}">${newestReleaseLabel}</a> has been released! Explore what's new. 🎉`,
-      isCloseable: true,
-    },
-
     algolia: {
       appId: 'HGUIB02S86',
       apiKey: '08ce042847a47babb4833e131c226e33',
@@ -314,7 +201,7 @@ const config: Config = {
     },
     navbar: {
       logo: {
-        href: `/${latestVersion}/get-started/what-is-amp`,
+        href: '/get-started/what-is-amp',
         alt: 'WSO2 Agent Manager Logo',
         src: 'img/WSO2 Agent Manager Logo_Black.svg',
         srcDark: 'img/WSO2 Agent Manager Logo_white.svg',
@@ -325,17 +212,6 @@ const config: Config = {
           sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Documentation',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'right',
-          dropdownActiveClassDisabled: true,
-          // Custom option, see src/theme/NavbarItem/DocsVersionDropdownNavbarItem.tsx.
-          // Next, then every release in versions.json order; a divider sets Cloud apart.
-          versionGroups: [
-            {versions: ['current', ...versions.filter(v => v !== 'cloud' && !unreleasedVersions.includes(v))]},
-            {versions: ['cloud']},
-          ],
         },
         {
           href: 'https://github.com/wso2/agent-manager',
@@ -353,11 +229,7 @@ const config: Config = {
           items: [
             {
               label: 'Overview',
-              to: `/${latestVersion}/get-started/what-is-amp`,
-            },
-            {
-              label: 'Quick Start',
-              to: `/${latestVersion}/get-started/quick-start`,
+              to: '/get-started/what-is-amp',
             },
           ],
         },
