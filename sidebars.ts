@@ -44,7 +44,219 @@ const sidebars: SidebarsConfig = {
         "type": "doc",
         "id": "agent-control-plane/overview"
       },
-      "items": []
+      "items": [
+        {
+          "type": "doc",
+          "id": "agent-control-plane/quickstart-guide",
+          "label": "Quick Start Guide"
+        },
+        {
+          "type": "category",
+          "label": "Create",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/create-ai-proxy/overview",
+              "label": "Overview"
+            },
+            {
+              "type": "category",
+              "label": "LLM Providers",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create-ai-proxy/llm-providers/configure-an-llm-provider",
+                  "label": "Configure an LLM Provider"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create-ai-proxy/llm-providers/use-a-custom-provider-template",
+                  "label": "Use a Custom Provider Template"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "App LLM Proxies",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create-ai-proxy/app-llm-proxies/configure-an-app-llm-proxy",
+                  "label": "Configure an App LLM Proxy"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create-ai-proxy/app-llm-proxies/route-to-several-providers",
+                  "label": "Route to Several Providers"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "MCP Proxies",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create-ai-proxy/mcp-proxies/configure-an-mcp-proxy",
+                  "label": "Configure an MCP Proxy"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Agent Proxies",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create-ai-proxy/agent-proxies/create-an-agent-proxy",
+                  "label": "Create an Agent Proxy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Develop",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/develop-ai-proxy/manage-llm-providers",
+              "label": "Manage LLM Providers"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/develop-ai-proxy/manage-provider-templates",
+              "label": "Manage Provider Templates"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/develop-ai-proxy/manage-app-llm-proxies",
+              "label": "Manage App LLM Proxies"
+            },
+            {
+              "type": "category",
+              "label": "Security",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/develop-ai-proxy/security/inbound-authentication",
+                  "label": "Inbound Authentication"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/develop-ai-proxy/security/genai-applications",
+                  "label": "GenAI Applications"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/develop-ai-proxy/security/manage-secrets",
+                  "label": "Manage Secrets"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Policies",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/develop-ai-proxy/policy/overview",
+                  "label": "Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/develop-ai-proxy/policy/attach-and-manage-policies",
+                  "label": "Attach and Manage Policies"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/develop-ai-proxy/policy/write-a-custom-ai-policy",
+                  "label": "Write a Custom AI Policy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Deploy",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/deploy-ai-proxy/overview",
+              "label": "Overview"
+            },
+            {
+              "type": "category",
+              "label": "CI/CD",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/deploy-ai-proxy/ci-cd/overview",
+                  "label": "Overview"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/deploy-ai-proxy/ci-cd/configure-a-ci-cd-workflow",
+                  "label": "Configure a CI/CD Workflow"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Test",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/test-ai-proxy/invoke-via-sdks",
+              "label": "Invoke via SDKs"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Observability",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/observability/insights",
+              "label": "Insights"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Administer",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/administer/managing-ai-gateways",
+              "label": "Manage AI Gateways"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/administer/managing-gateway-deployed-artifacts",
+              "label": "Manage Gateway-deployed AI Artifacts"
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "category",
