@@ -1,8 +1,8 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 // The Agent Manager Cloud sidebar. Every page in docs/ must be listed here.
-// Agent Control Plane, AI Gateway, and API Portal and AI Hub each keep their
-// pages in their own folder (docs/agent-control-plane/, docs/ai-gateway/, docs/api-portal/).
+// Agent Control Plane and AI Gateway each keep their pages in their own folder
+// (docs/agent-control-plane/, docs/ai-gateway/).
 const sidebars: SidebarsConfig = {
   "docsSidebar": [
     {
@@ -46,15 +46,11 @@ const sidebars: SidebarsConfig = {
       "label": "Agent Control Plane",
       "className": "sidebar-section-icon-control-plane",
       "collapsed": true,
-      "link": {
-        "type": "doc",
-        "id": "agent-control-plane/overview"
-      },
       "items": [
         {
           "type": "doc",
-          "id": "agent-control-plane/quickstart-guide",
-          "label": "Quick Start Guide"
+          "id": "agent-control-plane/overview",
+          "label": "Overview"
         },
         {
           "type": "category",
@@ -62,67 +58,36 @@ const sidebars: SidebarsConfig = {
           "collapsed": true,
           "items": [
             {
+              "type": "category",
+              "label": "Agents",
+              "collapsed": true,
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create/add-an-agent",
+                  "label": "Add an Agent"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create/create-from-source-code",
+                  "label": "Create an Agent from Source Code"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create/create-from-a-sample",
+                  "label": "Create an Agent from a Sample"
+                },
+                {
+                  "type": "doc",
+                  "id": "agent-control-plane/create/create-from-the-agent-catalog",
+                  "label": "Create an Agent from the Agent Catalog"
+                }
+              ]
+            },
+            {
               "type": "doc",
-              "id": "agent-control-plane/create-ai-proxy/overview",
-              "label": "Overview"
-            },
-            {
-              "type": "category",
-              "label": "LLM Providers",
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/create-ai-proxy/llm-providers/configure-an-llm-provider",
-                  "label": "Configure an LLM Provider"
-                },
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/create-ai-proxy/llm-providers/use-a-custom-provider-template",
-                  "label": "Use a Custom Provider Template"
-                }
-              ]
-            },
-            {
-              "type": "category",
-              "label": "App LLM Proxies",
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/create-ai-proxy/app-llm-proxies/configure-an-app-llm-proxy",
-                  "label": "Configure an App LLM Proxy"
-                },
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/create-ai-proxy/app-llm-proxies/route-to-several-providers",
-                  "label": "Route to Several Providers"
-                }
-              ]
-            },
-            {
-              "type": "category",
-              "label": "MCP Proxies",
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/create-ai-proxy/mcp-proxies/configure-an-mcp-proxy",
-                  "label": "Configure an MCP Proxy"
-                }
-              ]
-            },
-            {
-              "type": "category",
-              "label": "Agent Proxies",
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/create-ai-proxy/agent-proxies/create-an-agent-proxy",
-                  "label": "Create an Agent Proxy"
-                }
-              ]
+              "id": "agent-control-plane/create/mcp-servers",
+              "label": "MCP Servers"
             }
           ]
         },
@@ -133,18 +98,23 @@ const sidebars: SidebarsConfig = {
           "items": [
             {
               "type": "doc",
-              "id": "agent-control-plane/develop-ai-proxy/manage-llm-providers",
-              "label": "Manage LLM Providers"
+              "id": "agent-control-plane/develop/llm-and-tool-configurations",
+              "label": "LLM and Tool Configurations"
             },
             {
               "type": "doc",
-              "id": "agent-control-plane/develop-ai-proxy/manage-provider-templates",
-              "label": "Manage Provider Templates"
+              "id": "agent-control-plane/develop/build-an-agent",
+              "label": "Build an Agent"
             },
             {
               "type": "doc",
-              "id": "agent-control-plane/develop-ai-proxy/manage-app-llm-proxies",
-              "label": "Manage App LLM Proxies"
+              "id": "agent-control-plane/develop/configure-the-build",
+              "label": "Configure the Build"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/develop/edit-agent-details",
+              "label": "Edit Agent Details"
             },
             {
               "type": "category",
@@ -153,85 +123,32 @@ const sidebars: SidebarsConfig = {
               "items": [
                 {
                   "type": "doc",
-                  "id": "agent-control-plane/develop-ai-proxy/security/inbound-authentication",
-                  "label": "Inbound Authentication"
+                  "id": "agent-control-plane/develop/security/agent-id",
+                  "label": "Agent ID"
                 },
                 {
                   "type": "doc",
-                  "id": "agent-control-plane/develop-ai-proxy/security/genai-applications",
-                  "label": "GenAI Applications"
-                },
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/develop-ai-proxy/security/manage-secrets",
-                  "label": "Manage Secrets"
-                }
-              ]
-            },
-            {
-              "type": "category",
-              "label": "Policies",
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/develop-ai-proxy/policy/overview",
-                  "label": "Overview"
-                },
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/develop-ai-proxy/policy/attach-and-manage-policies",
-                  "label": "Attach and Manage Policies"
-                },
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/develop-ai-proxy/policy/write-a-custom-ai-policy",
-                  "label": "Write a Custom AI Policy"
+                  "id": "agent-control-plane/develop/security/api-keys",
+                  "label": "API Keys"
                 }
               ]
             }
           ]
         },
         {
-          "type": "category",
-          "label": "Deploy",
-          "collapsed": true,
-          "items": [
-            {
-              "type": "doc",
-              "id": "agent-control-plane/deploy-ai-proxy/overview",
-              "label": "Overview"
-            },
-            {
-              "type": "category",
-              "label": "CI/CD",
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/deploy-ai-proxy/ci-cd/overview",
-                  "label": "Overview"
-                },
-                {
-                  "type": "doc",
-                  "id": "agent-control-plane/deploy-ai-proxy/ci-cd/configure-a-ci-cd-workflow",
-                  "label": "Configure a CI/CD Workflow"
-                }
-              ]
-            }
-          ]
+          "type": "doc",
+          "id": "agent-control-plane/deploy/deploy-an-agent",
+          "label": "Deploy"
         },
         {
-          "type": "category",
-          "label": "Test",
-          "collapsed": true,
-          "items": [
-            {
-              "type": "doc",
-              "id": "agent-control-plane/test-ai-proxy/invoke-via-sdks",
-              "label": "Invoke via SDKs"
-            }
-          ]
+          "type": "doc",
+          "id": "agent-control-plane/test/try-your-agent",
+          "label": "Test"
+        },
+        {
+          "type": "doc",
+          "id": "agent-control-plane/publish/publish-to-the-agent-catalog",
+          "label": "Publish"
         },
         {
           "type": "category",
@@ -240,8 +157,35 @@ const sidebars: SidebarsConfig = {
           "items": [
             {
               "type": "doc",
-              "id": "agent-control-plane/observability/insights",
-              "label": "Insights"
+              "id": "agent-control-plane/observability/traces",
+              "label": "Traces"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/observability/runtime-logs",
+              "label": "Runtime Logs"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/observability/system-metrics",
+              "label": "System Metrics"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Evaluation",
+          "collapsed": true,
+          "items": [
+            {
+              "type": "doc",
+              "id": "agent-control-plane/evaluation/evaluators",
+              "label": "Evaluators"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/evaluation/monitors",
+              "label": "Monitors"
             }
           ]
         },
@@ -252,13 +196,28 @@ const sidebars: SidebarsConfig = {
           "items": [
             {
               "type": "doc",
-              "id": "agent-control-plane/administer/managing-ai-gateways",
-              "label": "Manage AI Gateways"
+              "id": "agent-control-plane/administer/projects",
+              "label": "Projects"
             },
             {
               "type": "doc",
-              "id": "agent-control-plane/administer/managing-gateway-deployed-artifacts",
-              "label": "Manage Gateway-deployed AI Artifacts"
+              "id": "agent-control-plane/administer/gateways",
+              "label": "Gateways"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/administer/identity-providers",
+              "label": "Identity Providers"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/administer/llm-service-providers",
+              "label": "LLM Service Providers"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/administer/agent-identity-groups-and-roles",
+              "label": "Agent Identity Groups and Roles"
             }
           ]
         }
@@ -272,17 +231,6 @@ const sidebars: SidebarsConfig = {
       "link": {
         "type": "doc",
         "id": "ai-gateway/overview"
-      },
-      "items": []
-    },
-    {
-      "type": "category",
-      "label": "API Portal and AI Hub",
-      "className": "sidebar-section-icon-portal",
-      "collapsed": true,
-      "link": {
-        "type": "doc",
-        "id": "api-portal/overview"
       },
       "items": []
     },
