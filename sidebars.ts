@@ -238,7 +238,8 @@ const sidebars: SidebarsConfig = {
           "items": [
             "ai-gateway/self-hosted-gateways/architecture",
             "ai-gateway/self-hosted-gateways/quickstart-guide",
-            "ai-gateway/self-hosted-gateways/deploy-and-test",
+            "ai-gateway/self-hosted-gateways/deploy-an-llm-service-provider",
+            "ai-gateway/self-hosted-gateways/deploy-an-mcp-server",
             "ai-gateway/self-hosted-gateways/setting-up",
             "ai-gateway/self-hosted-gateways/high-availability",
             {
