@@ -6,13 +6,10 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   "docsSidebar": [
     {
-      "type": "category",
-      "label": "Get Started",
-      "collapsed": true,
-      "items": [
-        "get-started/what-is-amp"
-      ],
-      "className": "sidebar-section-icon-get-started"
+      "type": "doc",
+      "id": "get-started/what-is-amp",
+      "label": "Overview",
+      "className": "sidebar-section-icon-overview"
     },
     {
       "type": "doc",
