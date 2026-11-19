@@ -225,11 +225,34 @@ const sidebars: SidebarsConfig = {
       "label": "AI Gateway",
       "className": "sidebar-section-icon-ai-gateway",
       "collapsed": true,
-      "link": {
-        "type": "doc",
-        "id": "ai-gateway/overview"
-      },
-      "items": []
+      "items": [
+        {
+          "type": "doc",
+          "id": "ai-gateway/overview",
+          "label": "Overview"
+        },
+        {
+          "type": "category",
+          "label": "Self-Hosted Gateways",
+          "collapsed": true,
+          "items": [
+            "ai-gateway/self-hosted-gateways/architecture",
+            "ai-gateway/self-hosted-gateways/quickstart-guide",
+            "ai-gateway/self-hosted-gateways/setting-up",
+            "ai-gateway/self-hosted-gateways/high-availability",
+            {
+              "type": "category",
+              "label": "Observability",
+              "collapsed": true,
+              "items": [
+                "ai-gateway/self-hosted-gateways/observability/collect-gateway-logs",
+                "ai-gateway/self-hosted-gateways/observability/trace-requests",
+                "ai-gateway/self-hosted-gateways/observability/monitor-gateway-metrics"
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "category",
