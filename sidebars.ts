@@ -71,13 +71,18 @@ const sidebars: SidebarsConfig = {
                 },
                 {
                   "type": "doc",
+                  "id": "agent-control-plane/create/create-from-the-agent-catalog",
+                  "label": "Create an Agent from the Agent Catalog"
+                },
+                {
+                  "type": "doc",
                   "id": "agent-control-plane/create/create-from-a-sample",
                   "label": "Create an Agent from a Sample"
                 },
                 {
                   "type": "doc",
-                  "id": "agent-control-plane/create/create-from-the-agent-catalog",
-                  "label": "Create an Agent from the Agent Catalog"
+                  "id": "agent-control-plane/create/register-an-externally-hosted-agent",
+                  "label": "Register an Externally-Hosted Agent"
                 }
               ]
             },
@@ -95,8 +100,13 @@ const sidebars: SidebarsConfig = {
           "items": [
             {
               "type": "doc",
-              "id": "agent-control-plane/develop/llm-and-tool-configurations",
-              "label": "LLM and Tool Configurations"
+              "id": "agent-control-plane/develop/llm-configurations",
+              "label": "LLM Configurations"
+            },
+            {
+              "type": "doc",
+              "id": "agent-control-plane/develop/tool-configurations",
+              "label": "Tool Configurations"
             },
             {
               "type": "doc",
